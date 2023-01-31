@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
-{
+{   
+    // Lagacy Code
+    /*
     public GameObject optionMenu;
     public GameObject ExitMenu;
     public GameObject mainMenu;
@@ -42,4 +44,5 @@ public class PauseManager : MonoBehaviour
         optionMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
+    */
 }

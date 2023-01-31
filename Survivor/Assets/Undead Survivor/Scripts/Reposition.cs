@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Reposition : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Reposition : MonoBehaviour
     {
         coll = GetComponent<Collider2D>();
     }
+
 
     void OnTriggerExit2D(Collider2D collision)
     {
@@ -39,7 +41,7 @@ public class Reposition : MonoBehaviour
                 break;
             case "Enemy":
                 if (coll.enabled)
-                {
+                {   
                     transform.Translate(playerDir * 20 + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f)));
                 }
 

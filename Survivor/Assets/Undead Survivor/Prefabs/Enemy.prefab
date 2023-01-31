@@ -167,7 +167,10 @@ MonoBehaviour:
   health: 0
   maxHealth: 10
   atk: 1
+  exp: 0
+  itemPrefabId: 2
   target: {fileID: 0}
+  isLive: 0
 --- !u!114 &7971667796405336372
 MonoBehaviour:
   m_ObjectHideFlags: 0

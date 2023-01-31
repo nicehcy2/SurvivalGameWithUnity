@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     int level;
     int spawnCount;
     // 최대 몬스터 생성 수
-    int MaxEnemy = 100;
+    int MaxEnemy = 1000;
     float timer;
 
     void Awake()

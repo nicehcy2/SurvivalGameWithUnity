@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour
     public float MaxGameTime = 0.3f * 60f;
     public bool Dead = false;
     public bool pauseActive = false;
+    public bool levelUpActive = false;
 
     public PoolManager pool;
     public Player player;
     public GameObject gameoverUI;
     public GameObject pauseUI;
+    public GameObject levelUpUI;
 
     void Awake()
     {   if (instance == null)
@@ -35,10 +37,11 @@ public class GameManager : MonoBehaviour
         if (player.curHealth <= 0)
         {
             OnPlayerDead();
+            gameTime = 0;
         }
         else
         {
-            if (!pauseActive)
+            if (!pauseActive && !levelUpActive)
             {
                 gameTime += Time.deltaTime;
 
@@ -71,5 +74,28 @@ public class GameManager : MonoBehaviour
     {
         pauseActive = false;
         pauseUI.SetActive(false);
+    }
+
+    public void levelUp()
+    {
+        levelUpUI.SetActive(true);
+    }
+
+    public void Select1()
+    {
+        levelUpActive = false;
+        levelUpUI.SetActive(false);
+    }
+
+    public void Select2()
+    {
+        levelUpActive = false;
+        levelUpUI.SetActive(false);
+    }
+
+    public void Select3()
+    {
+        levelUpActive = false;
+        levelUpUI.SetActive(false);
     }
 }

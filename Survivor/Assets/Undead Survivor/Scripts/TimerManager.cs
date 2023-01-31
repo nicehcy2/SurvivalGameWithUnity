@@ -42,7 +42,7 @@ public class TimerManager : MonoBehaviour
             }
         }
 
-        if (GameManager.instance.Dead || GameManager.instance.pauseActive)
+        if (GameManager.instance.Dead || GameManager.instance.pauseActive || GameManager.instance.levelUpActive)
         {
             active = false;
         }

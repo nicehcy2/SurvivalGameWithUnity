@@ -9,13 +9,16 @@ public class Enemy : MonoBehaviour
     public float maxHealth;
     public float atk;
     public float exp;
+    public int itemPrefabId;
 
     public Rigidbody2D target;
 
-    bool isLive;
+    public bool isLive;
     Rigidbody2D rigid;
     SpriteRenderer spriter;
     Animator anim;
+
+    // public GameObject expCoin;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
         if (!isLive)
             return;
-        if (GameManager.instance.Dead || GameManager.instance.pauseActive)
+        if (GameManager.instance.Dead || GameManager.instance.pauseActive || GameManager.instance.levelUpActive)
         {
             rigid.MovePosition(rigid.position);
             return;
@@ -46,7 +49,7 @@ public class Enemy : MonoBehaviour
     {
         if (!isLive)
             return;
-        if (GameManager.instance.Dead || GameManager.instance.pauseActive)
+        if (GameManager.instance.Dead || GameManager.instance.pauseActive || GameManager.instance.levelUpActive)
             return;
         spriter.flipX = target.position.x < rigid.position.x;
     }
@@ -55,6 +58,7 @@ public class Enemy : MonoBehaviour
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
+        gameObject.GetComponent<Collider2D>().enabled = true;
         health = maxHealth;
     }
 
@@ -75,5 +79,42 @@ public class Enemy : MonoBehaviour
         health = data.health;
         atk = data.atk;
         exp = data.exp;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
+
+        health -= collision.GetComponent<Bullet>().damage;
+
+        if (health <= 0)
+        {   
+            EnemyDead();
+            DropExp();
+        }
+    }
+    public void DropExp()
+    {
+        if (!isLive)
+        {   
+            int ran = Random.Range(0, 10);
+            if (ran < 8)
+            {   
+                // Instantiate(expCoin, transform.position, expCoin.transform.rotation);
+                Transform exp = GameManager.instance.pool.Get(itemPrefabId).transform;
+                exp.transform.position = this.transform.position;
+                exp.transform.rotation = this.transform.rotation;
+            }
+        }
+    }
+
+    public void EnemyDead()
+    {   
+        isLive = false;
+        // Enemy 충돌 비활성화 -> reposition 스크립트가 작동안함
+        gameObject.GetComponent<Collider2D>().enabled = false;
+
+        gameObject.SetActive(false);
     }
 }
