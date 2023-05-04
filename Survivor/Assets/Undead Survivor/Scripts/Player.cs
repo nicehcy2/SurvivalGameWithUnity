@@ -18,10 +18,15 @@ public class Player : MonoBehaviour
     public ExpBar expBar;
 
     Rigidbody2D rigid;
+    SpriteRenderer sprite;
+
+    Animator anim;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         speed = 5;
         level = 1;
         lateLevel = level;
@@ -68,7 +73,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+    private void LateUpdate()
+    {
+        anim.SetFloat("speed", inputVec.magnitude);
+        
+        if (GameManager.instance.Dead) {
+            anim.SetTrigger("dead");
+        }
+        
+
+        if (inputVec.x != 0)
+        {
+            sprite.flipX = inputVec.x < 0;
+        }
+    }
+
+
     // юс╫ц
     public void DamagePlayer(float damage)
     {
