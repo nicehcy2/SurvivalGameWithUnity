@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour
         else
         {
             anim.SetTrigger("Hit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
     }
 
@@ -135,12 +136,16 @@ public class Enemy : MonoBehaviour
     }
 
     public void EnemyDead()
-    {   
+    {
+        if (isLive)
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
         isLive = false;
         coll.enabled = false;
         rigid.simulated = false;
         spriter.sortingOrder = 1;
         anim.SetBool("Dead", true);
+
+        
         Invoke("FalseActive", 1.0f);
     }
 

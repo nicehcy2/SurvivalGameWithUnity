@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     {   if (instance == null)
         {
             instance = this;
+            AudioManager.instance.PlayBgm(true);
         }
         else
         {
@@ -57,6 +58,8 @@ public class GameManager : MonoBehaviour
     {
         Dead = true;
         gameoverUI.SetActive(true);
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
     
     public void Restart()
@@ -68,34 +71,40 @@ public class GameManager : MonoBehaviour
     {
         pauseActive = true;
         pauseUI.SetActive(true);
+        AudioManager.instance.EffectBgm(true);
     }
 
     public void Resume()
     {
         pauseActive = false;
         pauseUI.SetActive(false);
+        AudioManager.instance.EffectBgm(false);
     }
 
     public void levelUp()
     {
         levelUpUI.SetActive(true);
+        AudioManager.instance.EffectBgm(true);
     }
 
     public void Select1()
     {
         levelUpActive = false;
         levelUpUI.SetActive(false);
+        AudioManager.instance.EffectBgm(false);
     }
 
     public void Select2()
     {
         levelUpActive = false;
         levelUpUI.SetActive(false);
+        AudioManager.instance.EffectBgm(false);
     }
 
     public void Select3()
     {
         levelUpActive = false;
         levelUpUI.SetActive(false);
+        AudioManager.instance.EffectBgm(false);
     }
 }
