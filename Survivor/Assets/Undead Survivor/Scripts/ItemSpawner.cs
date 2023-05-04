@@ -34,7 +34,10 @@ public class ItemSpawner : MonoBehaviour
     }
 
     private void Spawn()
-    {   
+    {
+        if (GameManager.instance.pauseActive || GameManager.instance.pauseActive || GameManager.instance.Dead)
+            return;
+
         GameObject selectedItem = items[Random.Range(0, items.Length)];
         GameObject item = Instantiate(selectedItem);
         item.transform.Translate(playerTransform.position + 

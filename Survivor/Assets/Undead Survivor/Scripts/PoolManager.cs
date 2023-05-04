@@ -22,6 +22,9 @@ public class PoolManager : MonoBehaviour
 
     public GameObject Get(int index)
     {
+        if (GameManager.instance.pauseActive || GameManager.instance.pauseActive || GameManager.instance.Dead)
+            return null;
+
         GameObject select = null;
 
         // ... 선택한 풀의 놀고(비활성화) 있는 게임 오브젝트 접근
