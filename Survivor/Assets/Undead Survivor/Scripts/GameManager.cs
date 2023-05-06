@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     {   if (instance == null)
         {
             instance = this;
-            AudioManager.instance.PlayBgm(true);
         }
         else
         {
