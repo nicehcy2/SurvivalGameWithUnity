@@ -79,6 +79,11 @@ public class Player : MonoBehaviour
         
         if (GameManager.instance.Dead) {
             anim.SetTrigger("dead");
+
+            for (int i = 2; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
         
 
@@ -92,7 +97,7 @@ public class Player : MonoBehaviour
     // юс╫ц
     public void DamagePlayer(float damage)
     {
-        curHealth -= damage;
+        curHealth -= Time.deltaTime * damage;
 
         healthBar.SetHealth(curHealth);
     }

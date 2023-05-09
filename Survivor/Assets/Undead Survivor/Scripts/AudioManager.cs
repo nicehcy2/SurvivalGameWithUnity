@@ -32,12 +32,12 @@ public class AudioManager : MonoBehaviour
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
-        bgmPlayer.playOnAwake = true;
+        bgmPlayer.playOnAwake = false;
         bgmPlayer.loop= true;
         bgmPlayer.volume= bgmVolume;
         bgmPlayer.clip = bgmClip;
         bgmHighPassFilter = Camera.main.GetComponent<AudioHighPassFilter>();
-        PlayBgm(true);
+        // PlayBgm(true);
 
         // 효과음 플레이어 초기화 
         GameObject sfxObject = new GameObject("sfxPlayer");

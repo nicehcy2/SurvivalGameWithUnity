@@ -21,10 +21,14 @@ public class GameManager : MonoBehaviour
     public GameObject pauseUI;
     public GameObject levelUpUI;
 
+    public GameObject playerObject;
+
     void Awake()
     {   if (instance == null)
         {
             instance = this;
+            // 게임 시작 전엔 pause Canvas가 비활성화 돼있으므로 상관없음
+            pauseActive = true;
         }
         else
         {
@@ -43,7 +47,7 @@ public class GameManager : MonoBehaviour
         {
             if (!pauseActive && !levelUpActive)
             {
-                gameTime += Time.deltaTime;
+                // gameTime += Time.deltaTime;
 
                 if (gameTime > MaxGameTime)
                 {
@@ -64,6 +68,13 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GameStart()
+    {
+        pauseActive = false;
+        playerObject.SetActive(true);
+        AudioManager.instance.PlayBgm(true);
     }
 
     public void Pause()

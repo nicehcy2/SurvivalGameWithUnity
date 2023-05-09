@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
-    bool active;
+    public bool active;
     public Text[] text_time;
     // public Text bin_text;
     float time;
@@ -13,7 +13,7 @@ public class TimerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        active = true;
+        active = false;
     }
 
     // Update is called once per frame

@@ -26,9 +26,12 @@ public class Spawner : MonoBehaviour
         
         if (timer > spawnData[level].spawnTime && GameManager.instance.Dead == false && spawnCount < MaxEnemy)
         {
-            Spawn();
-            spawnCount++;
-            timer = 0;
+            if (GameManager.instance.pauseActive == false && GameManager.instance.levelUpActive == false)
+            {
+                Spawn();
+                spawnCount++;
+                timer = 0;
+            }
         }
 
     }

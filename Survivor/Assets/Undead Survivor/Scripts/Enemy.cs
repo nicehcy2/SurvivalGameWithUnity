@@ -126,8 +126,10 @@ public class Enemy : MonoBehaviour
         {   
             int ran = Random.Range(0, 10);
             if (ran < 7)
-            {   
+            {
                 // Instantiate(expCoin, transform.position, expCoin.transform.rotation);
+                if (GameManager.instance.Dead || GameManager.instance.levelUpActive || GameManager.instance.pauseActive)
+                    return;
                 Transform exp = GameManager.instance.pool.Get(itemPrefabId).transform;
                 exp.transform.position = this.transform.position;
                 exp.transform.rotation = this.transform.rotation;
