@@ -125,7 +125,7 @@ public class Enemy : MonoBehaviour
         if (!isLive)
         {   
             int ran = Random.Range(0, 10);
-            if (ran < 3)
+            if (ran < 7)
             {   
                 // Instantiate(expCoin, transform.position, expCoin.transform.rotation);
                 Transform exp = GameManager.instance.pool.Get(itemPrefabId).transform;

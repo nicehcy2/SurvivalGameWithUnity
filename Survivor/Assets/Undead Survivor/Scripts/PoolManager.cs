@@ -22,7 +22,7 @@ public class PoolManager : MonoBehaviour
 
     public GameObject Get(int index)
     {
-        if (GameManager.instance.pauseActive || GameManager.instance.pauseActive || GameManager.instance.Dead)
+        if (GameManager.instance.pauseActive || GameManager.instance.levelUpActive || GameManager.instance.Dead)
             return null;
 
         GameObject select = null;

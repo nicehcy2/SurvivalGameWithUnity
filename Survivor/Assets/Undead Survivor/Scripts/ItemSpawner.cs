@@ -38,8 +38,10 @@ public class ItemSpawner : MonoBehaviour
         if (GameManager.instance.pauseActive || GameManager.instance.pauseActive || GameManager.instance.Dead)
             return;
 
+        //GameObject itemObject = new GameObject("items");
+        //itemObject.transform.parent = transform;
         GameObject selectedItem = items[Random.Range(0, items.Length)];
-        GameObject item = Instantiate(selectedItem);
+        GameObject item = Instantiate(selectedItem, transform);
         item.transform.Translate(playerTransform.position + 
             new Vector3(Random.Range(-maxDistance, maxDistance), Random.Range(-maxDistance, maxDistance)));
 
