@@ -7,7 +7,11 @@ public class Item : MonoBehaviour
     // public string type;
     Rigidbody2D rigid;
 
-    public HealthBar healthBar;
+    private HealthBar healthBar;
+
+    public GameObject inventory;
+
+    public enum ItemType { HealthPack = 0 }
 
     // Start is called before the first frame update
     void Awake()
@@ -15,6 +19,7 @@ public class Item : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         rigid.velocity = Vector3.zero;
         healthBar = GetComponent<HealthBar>();
+        inventory = GameObject.Find("InventoryPanel");
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -22,6 +27,10 @@ public class Item : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             GameManager.instance.player.HealPlayer(5.0f);
+
+            inventory.GetComponent<Inventory>().AddItem();
+            // Debug.Log("Item");
+
             Destroy(gameObject);
         }
     }
