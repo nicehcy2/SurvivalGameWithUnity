@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
     public ExpBar expBar;
+    // public Inventory inventory;
 
     Rigidbody2D rigid;
     SpriteRenderer sprite;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         lateLevel = level;
         curHealth = maxHealth;
         exp = 0;
+        // inventory = GameObject.Find("InventoryPanel");
     }
 
     private void Update()
@@ -114,4 +116,16 @@ public class Player : MonoBehaviour
         exp++;
         expBar.SetExpBar(exp);
     }
+
+    /*
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Item")
+        {
+            GameManager.instance.player.HealPlayer(5.0f);
+
+            // if (inventory.GetComponent<Inventory>().AddItem()) Destroy(gameObject);
+            if (inventory.AddItem()) DestoryItem();
+        }
+    }*/
 }

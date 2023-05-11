@@ -12,13 +12,27 @@ public class Inventory : MonoBehaviour
     public int maxSlot = 2;
     public int itemIdx = 0;
 
-    public void AddItem()
+    public bool AddItem(int idx)
     {
         if (items.Count < maxSlot)
         {
-            items.Add(itemIdx);
-            AddImage(itemIdx++);
+            if (idx == 0) // HealthPack
+            {
+                items.Add(itemIdx);
+                AddImage(itemIdx++);
+            }
+            if (idx == 1) // Mag
+            {
+                items.Add(itemIdx);
+                AddImage(itemIdx++);
+            }
             // FreshSlot();
+            return true;
+        }
+        else
+        {
+            Debug.Log("Item Add exception");
+            return false;
         }
     }
 

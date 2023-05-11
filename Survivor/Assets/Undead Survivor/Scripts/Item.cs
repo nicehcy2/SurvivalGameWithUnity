@@ -22,16 +22,25 @@ public class Item : MonoBehaviour
         inventory = GameObject.Find("InventoryPanel");
     }
 
+    public void DestoryItem()
+    {
+        Destroy(gameObject);
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            GameManager.instance.player.HealPlayer(5.0f);
-
-            inventory.GetComponent<Inventory>().AddItem();
-            // Debug.Log("Item");
-
-            Destroy(gameObject);
+            if (gameObject.name == "HealthPack(Clone)")
+            {
+                if (inventory.GetComponent<Inventory>().AddItem(0)) Destroy(gameObject);
+            }
+            if (gameObject.name == "Mag(Clone)")
+            {
+                if (inventory.GetComponent<Inventory>().AddItem(1)) Destroy(gameObject);
+            }
+            // GameManager.instance.player.HealPlayer(5.0f);
         }
     }
+
 }
