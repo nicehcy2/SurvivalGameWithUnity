@@ -7,12 +7,28 @@ public class Exp : MonoBehaviour
     public string type;
     Rigidbody2D rigid;
 
+    public bool magnetTime;
+
     // Start is called before the first frame update
     void Awake()
     {   
         rigid = GetComponent<Rigidbody2D>();
         rigid.velocity = Vector3.zero;
+        magnetTime = false;
         Invoke("FalseEXP", 20.0f);
+    }
+
+    private void Update()
+    {
+        if (magnetTime)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, GameManager.instance.player.transform.position, 0.01f);
+        }
+    }
+
+    private void OnEnable()
+    {
+        magnetTime = false;
     }
 
     public void FalseEXP()

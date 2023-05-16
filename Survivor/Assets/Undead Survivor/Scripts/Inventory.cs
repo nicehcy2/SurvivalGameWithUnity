@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject inventory;
+    // public GameObject inventory;
     
     public List<Sprite> itemSprite;
 
@@ -29,7 +29,11 @@ public class Inventory : MonoBehaviour
                 items.Add(iNum);
                 AddImage(itemIdx++, iNum);
             }
-            // FreshSlot();
+            if (iNum == 2) // Adrenaline
+            {
+                items.Add(iNum);
+                AddImage(itemIdx++, iNum);
+            }
             return true;
         }
         else
@@ -47,7 +51,8 @@ public class Inventory : MonoBehaviour
             gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[0];
         else if (iNum == 1)
             gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[1];
-        Debug.Log("ItemChange");
+        else if (iNum == 2)
+            gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[2];
     }
 
     public void DeleteItem0()
@@ -58,7 +63,7 @@ public class Inventory : MonoBehaviour
         }
         else if (items[0] == 1)
         {
-
+            GameManager.instance.player.setActiveMag();
         }
         gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         items.RemoveAt(0);
@@ -72,7 +77,7 @@ public class Inventory : MonoBehaviour
         }
         else if (items[0] == 1)
         {
-
+            GameManager.instance.player.setActiveMag();
         }
         gameObject.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
         items.RemoveAt(1);

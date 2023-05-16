@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
     public ExpBar expBar;
+    public Magent magnet;
     // public Inventory inventory;
 
     Rigidbody2D rigid;
@@ -104,6 +105,15 @@ public class Player : MonoBehaviour
         healthBar.SetHealth(curHealth);
     }
 
+    public void setPlayerExp()
+    {
+        exp++;
+        expBar.SetExpBar(exp);
+    }
+
+    /* ITEM */
+
+    // Heal
     public void HealPlayer(float heal)
     {
         curHealth += heal;
@@ -111,21 +121,15 @@ public class Player : MonoBehaviour
         healthBar.SetHealth(curHealth);
     }
 
-    public void setPlayerExp()
+    public void setActiveMag()
     {
-        exp++;
-        expBar.SetExpBar(exp);
+        StartCoroutine(magnetItem());
     }
 
-    /*
-    public void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator magnetItem()
     {
-        if (collision.gameObject.tag == "Item")
-        {
-            GameManager.instance.player.HealPlayer(5.0f);
-
-            // if (inventory.GetComponent<Inventory>().AddItem()) Destroy(gameObject);
-            if (inventory.AddItem()) DestoryItem();
-        }
-    }*/
+        transform.GetChild(4).GetChild(0).gameObject.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        transform.GetChild(4).GetChild(0).gameObject.SetActive(false);
+    }
 }
