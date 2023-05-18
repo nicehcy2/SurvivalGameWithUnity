@@ -94,22 +94,28 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Bullet"))
-            return;
+        if (collision.CompareTag("Bullet"))
+        {
+            health -= collision.GetComponent<Bullet>().damage;
+            StartCoroutine(KnockBack());
 
-        health -= collision.GetComponent<Bullet>().damage;
-        StartCoroutine(KnockBack());
-
+            if (health > 0)
+            {
+                anim.SetTrigger("Hit");
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            }
+        }
+        else if (collision.CompareTag("Bomb"))
+        {
+            health -= 100f;
+        }
         if (health <= 0)
-        {   
+        {
             EnemyDead();
             Invoke("DropExp", 1.0f);
         }
-        else
-        {
-            anim.SetTrigger("Hit");
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
-        }
+
+
     }
 
     IEnumerator KnockBack()

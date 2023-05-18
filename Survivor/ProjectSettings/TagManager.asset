@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Exp
   - Item
+  - Bomb
   layers:
   - Default
   - TransparentFX

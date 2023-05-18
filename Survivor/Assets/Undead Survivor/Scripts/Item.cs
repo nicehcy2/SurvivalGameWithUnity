@@ -43,6 +43,10 @@ public class Item : MonoBehaviour
             {
                 if (inventory.GetComponent<Inventory>().AddItem(2)) Destroy(gameObject);
             }
+            if (gameObject.name == "Bomb(Clone)")
+            {
+                if (inventory.GetComponent<Inventory>().AddItem(3)) Destroy(gameObject);
+            }
         }
     }
 

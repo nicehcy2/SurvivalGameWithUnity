@@ -9,29 +9,45 @@ public class Inventory : MonoBehaviour
     
     public List<Sprite> itemSprite;
 
-    public List<int> items;
-
+    public int[] items;
 
     public int maxSlot = 2;
-    public int itemIdx = 0;
+    private int itemIdx = 0;
+    private int itemCount = 0;
+
+    public void Start()
+    {   
+        items = new int[maxSlot];
+        items[0] = -1;
+        items[1] = -1;
+    }
 
     public bool AddItem(int iNum)
     {
-        if (items.Count < maxSlot)
+        if (itemCount < maxSlot)
         {
             if (iNum == 0) // HealthPack
             {
-                items.Add(iNum);
+                items[itemIdx] = (iNum);
+                itemCount++;
                 AddImage(itemIdx++, iNum);
             }
             if (iNum == 1) // Mag
             {
-                items.Add(iNum);
+                items[itemIdx] = (iNum);
+                itemCount++;
                 AddImage(itemIdx++, iNum);
             }
             if (iNum == 2) // Adrenaline
             {
-                items.Add(iNum);
+                items[itemIdx] = (iNum);
+                itemCount++;
+                AddImage(itemIdx++, iNum);
+            }
+            if (iNum == 3) // Adrenaline
+            {
+                items[itemIdx] = (iNum);
+                itemCount++;
                 AddImage(itemIdx++, iNum);
             }
             return true;
@@ -53,6 +69,8 @@ public class Inventory : MonoBehaviour
             gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[1];
         else if (iNum == 2)
             gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[2];
+        else if (iNum == 3)
+            gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[3];
     }
 
     public void DeleteItem0()
@@ -65,23 +83,43 @@ public class Inventory : MonoBehaviour
         {
             GameManager.instance.player.setActiveMag();
         }
+        else if (items[0] == 2)
+        {
+            GameManager.instance.player.setActiveAdrenaline();
+        }
+        else if (items[0] == 3)
+        {
+            GameManager.instance.player.setActiveBomb();
+        }
         gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        items.RemoveAt(0);
+        items[0] = -1;
+        itemCount--;
         itemIdx = 0;
     }
     public void DeleteItem1()
     {
-        if (items[0] == 0)
+        if (items[1] == 0)
         {
             GameManager.instance.player.HealPlayer(5.0f);
         }
-        else if (items[0] == 1)
+        else if (items[1] == 1)
         {
             GameManager.instance.player.setActiveMag();
         }
+        else if (items[1] == 2)
+        {
+            GameManager.instance.player.setActiveAdrenaline();
+        }
+        else if (items[1] == 3)
+        {
+            GameManager.instance.player.setActiveBomb();
+        }
         gameObject.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
-        items.RemoveAt(1);
-        itemIdx = 1;
+        items[1] = -1;
+        itemCount--;
+
+        if (items[0] == -1) itemIdx = 0;
+        else itemIdx = 1;
     }
 }
 

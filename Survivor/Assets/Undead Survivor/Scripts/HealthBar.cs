@@ -16,6 +16,10 @@ public class HealthBar : MonoBehaviour
         healthBar.value = playerHealth.maxHealth;
     }
 
+    private void Update()
+    {
+        healthBar.value = playerHealth.curHealth;
+    }
     public void SetHealth(float hp)
     {
         healthBar.value = hp;

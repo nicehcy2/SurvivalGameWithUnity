@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public int level;
     public int exp;
     private int lateLevel;
+    private bool adrenalineActive;
 
     public float curHealth;
     public float maxHealth = 20;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
         lateLevel = level;
         curHealth = maxHealth;
         exp = 0;
+        adrenalineActive = false;
         // inventory = GameObject.Find("InventoryPanel");
     }
 
@@ -49,6 +51,12 @@ public class Player : MonoBehaviour
         if (curHealth > maxHealth)
         {
             curHealth = maxHealth;
+        }
+
+        if (adrenalineActive)
+        {
+            curHealth -= 1f * Time.deltaTime;
+            speed = 8;
         }
     }
 
@@ -128,8 +136,32 @@ public class Player : MonoBehaviour
 
     IEnumerator magnetItem()
     {
+        Debug.Log("magnetItem");
         transform.GetChild(4).GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(10f);
         transform.GetChild(4).GetChild(0).gameObject.SetActive(false);
+    }
+
+    public void setActiveAdrenaline()
+    {
+        StartCoroutine(adrenalineItem());
+    }
+    IEnumerator adrenalineItem()
+    {
+        adrenalineActive = true;
+        yield return new WaitForSeconds(5f);
+        speed = 5;
+        adrenalineActive = false;
+    }
+
+    public void setActiveBomb()
+    {
+        transform.GetChild(4).GetChild(1).gameObject.SetActive(true);
+        Invoke("setUnActiveBomb", 1.0f);
+    }
+
+    public void setUnActiveBomb()
+    {
+        transform.GetChild(4).GetChild(1).gameObject.SetActive(false);
     }
 }
