@@ -6,30 +6,30 @@ public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoint;
     public SpawnData[] spawnData;
-
+    
     int level;
-    int spawnCount;
     // 최대 몬스터 생성 수
-    int MaxEnemy = 1000;
+    int MaxEnemy = 500;
+
+    // 몬스터의 스폰 시기를 계산하기 위한 변수
     float timer;
 
     void Awake()
     {
         spawnPoint = GetComponentsInChildren<Transform>();
-        spawnCount = 0;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
+        // 몬스터 소환 level을 적용
         level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnData.Length -1);
         
-        if (timer > spawnData[level].spawnTime && GameManager.instance.Dead == false && spawnCount < MaxEnemy)
+        if (timer > spawnData[level].spawnTime && GameManager.instance.Dead == false && GameManager.instance.enemyCount < MaxEnemy)
         {
             if (GameManager.instance.pauseActive == false && GameManager.instance.levelUpActive == false)
             {
                 Spawn();
-                spawnCount++;
                 timer = 0;
             }
         }
@@ -41,6 +41,7 @@ public class Spawner : MonoBehaviour
         GameObject enemy = GameManager.instance.pool.Get(0);
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
         enemy.GetComponent<Enemy>().Init(spawnData[level]);
+        GameManager.instance.enemyCount++;
     }
 }
 

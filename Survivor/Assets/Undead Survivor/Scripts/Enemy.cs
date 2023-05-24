@@ -23,8 +23,6 @@ public class Enemy : MonoBehaviour
     public RuntimeAnimatorController[] animCon;
     Animator anim;
 
-    // public GameObject expCoin;
-
     // Start is called before the first frame update
     void Awake()
     {   
@@ -84,7 +82,7 @@ public class Enemy : MonoBehaviour
 
     public void Init(SpawnData data)
     {
-        //anim.runtimeAnimatorController = animCon[data.spriteType];
+        anim.runtimeAnimatorController = animCon[data.spriteType];
         speed = data.speed;
         maxHealth = data.health;
         health = data.health;
@@ -109,13 +107,12 @@ public class Enemy : MonoBehaviour
         {
             health -= 100f;
         }
+
         if (health <= 0)
         {
             EnemyDead();
             Invoke("DropExp", 1.0f);
-        }
-
-
+        } 
     }
 
     IEnumerator KnockBack()
@@ -152,14 +149,14 @@ public class Enemy : MonoBehaviour
         rigid.simulated = false;
         spriter.sortingOrder = 1;
         anim.SetBool("Dead", true);
+        GameManager.instance.enemyCount--;
 
-        
+
         Invoke("FalseActive", 1.0f);
     }
 
     public void FalseActive()
     {
         gameObject.SetActive(false);
-
     }
 }

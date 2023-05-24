@@ -21,7 +21,8 @@ public class TimerManager : MonoBehaviour
     {
         if (active)
         {
-            time += Time.deltaTime;
+            time = GameManager.instance.gameTime;
+            // time += Time.deltaTime;
 
             if ((int)time / 60 % 60 < 10)
             {

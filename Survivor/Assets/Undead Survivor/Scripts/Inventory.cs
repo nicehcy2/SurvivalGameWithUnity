@@ -44,7 +44,13 @@ public class Inventory : MonoBehaviour
                 itemCount++;
                 AddImage(itemIdx++, iNum);
             }
-            if (iNum == 3) // Adrenaline
+            if (iNum == 3) // Bomb
+            {
+                items[itemIdx] = (iNum);
+                itemCount++;
+                AddImage(itemIdx++, iNum);
+            }
+            if (iNum == 4) // Boost
             {
                 items[itemIdx] = (iNum);
                 itemCount++;
@@ -71,6 +77,8 @@ public class Inventory : MonoBehaviour
             gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[2];
         else if (iNum == 3)
             gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[3];
+        else if (iNum == 4)
+            gameObject.transform.GetChild(cnt).GetChild(0).GetComponent<Image>().sprite = itemSprite[4];
     }
 
     public void DeleteItem0()
@@ -90,6 +98,10 @@ public class Inventory : MonoBehaviour
         else if (items[0] == 3)
         {
             GameManager.instance.player.setActiveBomb();
+        }
+        else if (items[0] == 4)
+        {
+            GameManager.instance.player.setBoost();
         }
         gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         items[0] = -1;
@@ -113,6 +125,10 @@ public class Inventory : MonoBehaviour
         else if (items[1] == 3)
         {
             GameManager.instance.player.setActiveBomb();
+        }
+        else if (items[1] == 4)
+        {
+            GameManager.instance.player.setBoost();
         }
         gameObject.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
         items[1] = -1;

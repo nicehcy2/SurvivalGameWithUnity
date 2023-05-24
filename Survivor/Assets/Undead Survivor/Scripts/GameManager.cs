@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public float gameTime;
-    public float MaxGameTime = 0.3f * 60f;
+    public float MaxGameTime;
     public bool Dead = false;
     public bool pauseActive = false;
     public bool levelUpActive = false;
+    public int enemyCount = 0;
 
     public PoolManager pool;
     public Player player;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
         {
             if (!pauseActive && !levelUpActive)
             {
-                // gameTime += Time.deltaTime;
+                gameTime += Time.deltaTime;
 
                 if (gameTime > MaxGameTime)
                 {
@@ -61,6 +62,8 @@ public class GameManager : MonoBehaviour
     {
         Dead = true;
         gameoverUI.SetActive(true);
+        player.curHealth = 0.1f;
+        AudioManager.instance.PlayBgm(false);
 
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
     {
         pauseActive = false;
         playerObject.SetActive(true);
+        // playerSkill0.SetActive(true);
         AudioManager.instance.PlayBgm(true);
     }
 

@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     public int level;
     public int exp;
     private int lateLevel;
+
     private bool adrenalineActive;
+    private bool boostActive;
 
     public float curHealth;
     public float maxHealth = 20;
@@ -36,7 +38,6 @@ public class Player : MonoBehaviour
         curHealth = maxHealth;
         exp = 0;
         adrenalineActive = false;
-        // inventory = GameObject.Find("InventoryPanel");
     }
 
     private void Update()
@@ -56,12 +57,12 @@ public class Player : MonoBehaviour
         if (adrenalineActive)
         {
             curHealth -= 1f * Time.deltaTime;
-            speed = 8;
+            speed = 10.0f;
         }
     }
 
     void FixedUpdate()
-    {
+    {   
         // 위치 이동(순간 이동)
         if (!GameManager.instance.Dead && !GameManager.instance.pauseActive && !GameManager.instance.levelUpActive)
         {
@@ -136,7 +137,6 @@ public class Player : MonoBehaviour
 
     IEnumerator magnetItem()
     {
-        Debug.Log("magnetItem");
         transform.GetChild(4).GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(10f);
         transform.GetChild(4).GetChild(0).gameObject.SetActive(false);
@@ -163,5 +163,23 @@ public class Player : MonoBehaviour
     public void setUnActiveBomb()
     {
         transform.GetChild(4).GetChild(1).gameObject.SetActive(false);
+    }
+
+    public void setBoost()
+    {
+        StartCoroutine(boostItem());
+    }
+
+    IEnumerator boostItem()
+    {
+        boostActive = true;
+        transform.GetChild(4).GetChild(2).gameObject.SetActive(true);
+        speed = 8;
+
+
+        yield return new WaitForSeconds(3.0f);
+        speed = 5;
+        boostActive = false;
+        transform.GetChild(4).GetChild(2).gameObject.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
 
     public GameObject inventory;
 
-    public enum ItemType { HealthPack = 0, Mag, Adrenaline }
+    public enum ItemType { HealthPack = 0, Mag, Adrenaline, Bomb, Boost }
 
     // Start is called before the first frame update
     void Awake()
@@ -46,6 +46,10 @@ public class Item : MonoBehaviour
             if (gameObject.name == "Bomb(Clone)")
             {
                 if (inventory.GetComponent<Inventory>().AddItem(3)) Destroy(gameObject);
+            }
+            if (gameObject.name == "Boost(Clone)")
+            {
+                if (inventory.GetComponent<Inventory>().AddItem(4)) Destroy(gameObject);
             }
         }
     }

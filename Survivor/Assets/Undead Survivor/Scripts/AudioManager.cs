@@ -53,7 +53,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
     public void PlayBgm(bool isPlay)
     {
         if (isPlay)
