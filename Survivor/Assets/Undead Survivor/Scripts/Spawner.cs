@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     {
         timer += Time.deltaTime;
         // 몬스터 소환 level을 적용
-        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnData.Length -1);
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 30f), spawnData.Length -1);
         
         if (timer > spawnData[level].spawnTime && GameManager.instance.Dead == false && GameManager.instance.enemyCount < MaxEnemy)
         {

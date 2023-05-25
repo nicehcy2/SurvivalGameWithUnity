@@ -12,8 +12,11 @@ public class Level : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        level = player.level;
-        text_lv[0].text = level.ToString();
+        if (!GameManager.instance.pauseActive)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            level = player.level;
+            text_lv[0].text = level.ToString();
+        }
     }
 }

@@ -21,8 +21,10 @@ public class GameManager : MonoBehaviour
     public GameObject gameoverUI;
     public GameObject pauseUI;
     public GameObject levelUpUI;
+    public GameObject SkillUI;
 
     public GameObject playerObject;
+    public GameObject rangedWeapon;
 
     void Awake()
     {   if (instance == null)
@@ -75,8 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
-        pauseActive = false;
-        playerObject.SetActive(true);
+        SkillUI.SetActive(true);
         // playerSkill0.SetActive(true);
         AudioManager.instance.PlayBgm(true);
     }
@@ -98,27 +99,58 @@ public class GameManager : MonoBehaviour
     public void levelUp()
     {
         levelUpUI.SetActive(true);
+        levelUpUI.GetComponent<LevelUpManager>().selectUpgrade();
         AudioManager.instance.EffectBgm(true);
     }
 
     public void Select1()
     {
-        levelUpActive = false;
-        levelUpUI.SetActive(false);
-        AudioManager.instance.EffectBgm(false);
+        if (levelUpActive)
+        {
+            levelUpActive = false;
+            levelUpUI.SetActive(false);
+            AudioManager.instance.EffectBgm(false);
+        }
+        else
+        {
+            pauseActive = false;
+            rangedWeapon.SetActive(true); // 스킬을 선택하고 weapon 착용
+            SkillUI.SetActive(false);
+            AudioManager.instance.EffectBgm(false);
+        }
     }
 
     public void Select2()
     {
-        levelUpActive = false;
-        levelUpUI.SetActive(false);
-        AudioManager.instance.EffectBgm(false);
+        if (levelUpActive)
+        {
+            levelUpActive = false;
+            levelUpUI.SetActive(false);
+            AudioManager.instance.EffectBgm(false);
+        }
+        else
+        {
+            pauseActive = false;
+            playerObject.SetActive(true); // 스킬을 선택하고 weapon 착용
+            SkillUI.SetActive(false);
+            AudioManager.instance.EffectBgm(false);
+        }
     }
 
     public void Select3()
     {
-        levelUpActive = false;
-        levelUpUI.SetActive(false);
-        AudioManager.instance.EffectBgm(false);
+        if (levelUpActive)
+        {
+            levelUpActive = false;
+            levelUpUI.SetActive(false);
+            AudioManager.instance.EffectBgm(false);
+        }
+        else
+        {
+            pauseActive = false;
+            // playerObject.SetActive(true); // 스킬을 선택하고 weapon 착용 
+            SkillUI.SetActive(false);
+            AudioManager.instance.EffectBgm(false);
+        }
     }
 }

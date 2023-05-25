@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
 {
     public Vector2 inputVec;
     public float speed;
+    public float curSpeed;
     public int level;
     public int exp;
-    private int lateLevel;
+    int lateLevel;
 
     private bool adrenalineActive;
     private bool boostActive;
@@ -27,17 +28,21 @@ public class Player : MonoBehaviour
 
     Animator anim;
 
+    public Scanner scanner;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         speed = 5;
+        curSpeed = speed;
         level = 1;
         lateLevel = level;
         curHealth = maxHealth;
         exp = 0;
         adrenalineActive = false;
+        scanner = GetComponent<Scanner>();
     }
 
     private void Update()
@@ -57,7 +62,7 @@ public class Player : MonoBehaviour
         if (adrenalineActive)
         {
             curHealth -= 1f * Time.deltaTime;
-            speed = 10.0f;
+            speed = curSpeed + 5.0f;
         }
     }
 
@@ -150,7 +155,7 @@ public class Player : MonoBehaviour
     {
         adrenalineActive = true;
         yield return new WaitForSeconds(5f);
-        speed = 5;
+        speed = curSpeed;
         adrenalineActive = false;
     }
 
@@ -174,11 +179,11 @@ public class Player : MonoBehaviour
     {
         boostActive = true;
         transform.GetChild(4).GetChild(2).gameObject.SetActive(true);
-        speed = 8;
+        speed = speed + 3;
 
 
         yield return new WaitForSeconds(3.0f);
-        speed = 5;
+        speed = speed - 3;
         boostActive = false;
         transform.GetChild(4).GetChild(2).gameObject.SetActive(false);
     }

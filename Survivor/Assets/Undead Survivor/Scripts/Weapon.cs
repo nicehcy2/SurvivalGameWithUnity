@@ -6,11 +6,17 @@ public class Weapon : MonoBehaviour
 {
     public int id; // 무기 id
     public int prefabId;
-    public float damage;
+    public float damage = 10;
     public int count;
     public float speed;
 
     private float timer;
+    Player player;
+
+    private void Awake()
+    {
+        player = GetComponentInParent<Player>();
+    }
 
     void Start()
     {
@@ -48,6 +54,8 @@ public class Weapon : MonoBehaviour
         {
             case 0:
                 speed = 150; // 시계 반대 방향으로 회전 속도
+                damage = 10;
+                count = 3;
                 Batch();
                 break;
             case 1:
@@ -58,26 +66,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-  
-    void Batch()
-    {
-        for (int index = 0; index < count; index++)
-        {
-            Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
-
-            bullet.transform.position = new Vector3(0, 0, 0);
-            bullet.parent = transform; // 부모를 바꿈
-            
-            Vector3 rotVec = Vector3.forward * 360 * index / count;
-            bullet.Rotate(rotVec);
-            bullet.Translate(bullet.up * 1.5f, Space.World);
-
-            bullet.GetComponent<Bullet>().Init(damage, -1); // -1 is Infinity Per.
-        }
-    }
-    
-    /*
-    void Batch()
+    public void Batch()
     {
         for (int index = 0; index < count; index++)
         {
@@ -94,20 +83,33 @@ public class Weapon : MonoBehaviour
             }
 
             bullet.transform.position = new Vector3(0, 0, 0);
-
+            bullet.parent = transform; // 부모를 바꿈
+            
             Vector3 rotVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(rotVec);
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
-            bullet.GetComponent<Bullet>().Init(damage, -1); // -1 is Infinity Per.
+            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); // -1 is Infinity Per.
         }
-    }*/
+    }
+   
 
     void Fire()
     {
-        Debug.Log("111111");
-        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
-        bullet.transform.position = new Vector3(0, 0, 0); /*transform.position;*/
-        bullet.parent = transform;
+        //if (!GameManager.instance.pauseActive && !GameManager.instance.levelUpActive && !GameManager.instance.Dead)
+        {
+            if (!player.scanner.nearestTarget)
+                return;
+
+            Vector3 targetPos = player.scanner.nearestTarget.position;
+            Vector3 dir = targetPos - transform.position;
+            dir = dir.normalized;
+
+            Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+            bullet.position = transform.position; // 위치
+            bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir); // 회전
+            bullet.GetComponent<Bullet>().Init(damage, count, dir);
+            bullet.parent = transform;
+        }
     }
 }
