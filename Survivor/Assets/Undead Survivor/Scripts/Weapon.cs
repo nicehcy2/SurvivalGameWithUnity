@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour
             case 0:
                 speed = 150; // 시계 반대 방향으로 회전 속도
                 damage = 10;
-                count = 3;
+                count = 15;
                 Batch();
                 break;
             case 1:
