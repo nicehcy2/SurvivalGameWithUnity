@@ -24,7 +24,12 @@
 - 좀비를 처치하면 경험치를 드랍합니다. 경험치를 얻고 레벨을 올리면 스킬 혹은 플레이어의 스탯을 강화 시킬 수 있습니다. <br>
 - 플레이어의 레벨이 MAX가 되면 (11레벨) 보스가 출현합니다. 보스를 잡고 게임을 클리어하세요! <br>
 
-# 게임 플레이 방식
+## 아이템 설명
+|아이템|Health Pack|Boost|Adrenaline|Magnet|Bomb|
+|---|---|---|---|---|---|
+|방향키|<img width="64" alt="AdrenalineItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/bcd01a4c-36db-4989-a491-bd8e8a2b1478">|<img width="61" alt="BoostItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/36317c9e-42d6-4783-9bd7-7deeb9cb133f">|<img width="64" alt="AdrenalineItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/bcd01a4c-36db-4989-a491-bd8e8a2b1478">|<img width="44" alt="MagnetItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/839346f6-9f8f-45a7-bbdf-df56fb350092">|<img width="29" alt="BombItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/f01116f5-cfdd-4ec3-91e5-72245b72791f">|
+
+## 게임 플레이 방식
 - 플레이어 이동키
 
 |이동방향|상(위)|좌(왼쪽)|하(아래)|우(오른쪽)|
