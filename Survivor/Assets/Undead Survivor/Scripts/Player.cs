@@ -17,10 +17,13 @@ public class Player : MonoBehaviour
 
     public float curHealth;
     public float maxHealth = 20;
+    public int MaxLevel = 10;
 
     public HealthBar healthBar;
     public ExpBar expBar;
     public Magent magnet;
+
+    public Inventory inventory;
     // public Inventory inventory;
 
     Rigidbody2D rigid;
@@ -80,6 +83,7 @@ public class Player : MonoBehaviour
             rigid.MovePosition(rigid.position);
         }
     }
+
     private void OnMove(InputValue value)
     {
         if (!GameManager.instance.Dead && !GameManager.instance.pauseActive && !GameManager.instance.levelUpActive)
@@ -142,9 +146,9 @@ public class Player : MonoBehaviour
 
     IEnumerator magnetItem()
     {
-        transform.GetChild(4).GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(3).GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(10f);
-        transform.GetChild(4).GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(3).GetChild(0).gameObject.SetActive(false);
     }
 
     public void setActiveAdrenaline()
@@ -161,13 +165,13 @@ public class Player : MonoBehaviour
 
     public void setActiveBomb()
     {
-        transform.GetChild(4).GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(3).GetChild(1).gameObject.SetActive(true);
         Invoke("setUnActiveBomb", 1.0f);
     }
 
     public void setUnActiveBomb()
     {
-        transform.GetChild(4).GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(3).GetChild(1).gameObject.SetActive(false);
     }
 
     public void setBoost()
@@ -178,13 +182,13 @@ public class Player : MonoBehaviour
     IEnumerator boostItem()
     {
         boostActive = true;
-        transform.GetChild(4).GetChild(2).gameObject.SetActive(true);
+        transform.GetChild(3).GetChild(2).gameObject.SetActive(true);
         speed = speed + 3;
 
 
         yield return new WaitForSeconds(3.0f);
         speed = speed - 3;
         boostActive = false;
-        transform.GetChild(4).GetChild(2).gameObject.SetActive(false);
+        transform.GetChild(3).GetChild(2).gameObject.SetActive(false);
     }
 }

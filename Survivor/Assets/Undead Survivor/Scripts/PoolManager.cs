@@ -22,8 +22,8 @@ public class PoolManager : MonoBehaviour
 
     public GameObject Get(int index)
     {
-        if (GameManager.instance.pauseActive || GameManager.instance.levelUpActive || GameManager.instance.Dead)
-            return null;
+        if (GameManager.instance.pauseActive  || GameManager.instance.Dead)
+           return null;
 
         GameObject select = null;
 
@@ -47,6 +47,7 @@ public class PoolManager : MonoBehaviour
             select = Instantiate(prefabs[index], transform);
             pools[index].Add(select); 
         }
+
 
         return select;
     }

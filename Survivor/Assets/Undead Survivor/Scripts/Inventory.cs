@@ -22,6 +22,18 @@ public class Inventory : MonoBehaviour
         items[1] = -1;
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            DeleteItem0();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            DeleteItem1();
+        }
+    }
+
     public bool AddItem(int iNum)
     {
         if (itemCount < maxSlot)

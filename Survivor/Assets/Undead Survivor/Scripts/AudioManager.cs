@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,14 +10,14 @@ public class AudioManager : MonoBehaviour
     [Header("#BGM")]
     public AudioClip bgmClip;
     public float bgmVolume;
-    AudioSource bgmPlayer;
+    public AudioSource bgmPlayer;
     AudioHighPassFilter bgmHighPassFilter;
 
     [Header("#SFX")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
     public int channels;
-    AudioSource[] sfxPlayers;
+    public AudioSource[] sfxPlayers;
     int channelIndex;
 
     private void Awake()
@@ -34,10 +35,9 @@ public class AudioManager : MonoBehaviour
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop= true;
-        bgmPlayer.volume= bgmVolume;
+        bgmPlayer.volume = 0.2f;
         bgmPlayer.clip = bgmClip;
         bgmHighPassFilter = Camera.main.GetComponent<AudioHighPassFilter>();
-        // PlayBgm(true);
 
         // 효과음 플레이어 초기화 
         GameObject sfxObject = new GameObject("sfxPlayer");
@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
             sfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[index].playOnAwake = false;
             sfxPlayers[index].bypassListenerEffects = true;
-            sfxPlayers[index].volume= sfxVolume;
+            sfxPlayers[index].volume= 0.5f;
         }
     }
 
@@ -90,4 +90,6 @@ public class AudioManager : MonoBehaviour
             break;
         }
     }
+
+    
 }

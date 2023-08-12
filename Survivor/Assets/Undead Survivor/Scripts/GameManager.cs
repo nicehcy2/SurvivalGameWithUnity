@@ -15,16 +15,32 @@ public class GameManager : MonoBehaviour
     public bool pauseActive = false;
     public bool levelUpActive = false;
     public int enemyCount = 0;
+    public int weaponCount = 0;
+    public int weaponDamageCount = 0;
+    public int weaponLevelCount = 0;
+    
 
     public PoolManager pool;
     public Player player;
     public GameObject gameoverUI;
     public GameObject pauseUI;
+    public GameObject optionUI;
     public GameObject levelUpUI;
     public GameObject SkillUI;
+    public GameObject gameclearUI;
 
     public GameObject playerObject;
     public GameObject rangedWeapon;
+    public Weapon meleeWeapon;
+    public bool meleeWeaponActive = false;
+    public Weapon rangeWeapon;
+    public bool rangeWeaponActive = false;
+
+    public Scrollbar BGMScrollbar;
+    public Scrollbar SFXScrollbar;
+
+    public WeaponData data0;
+    public WeaponData data1;
 
     void Awake()
     {   if (instance == null)
@@ -41,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (player.curHealth <= 0)
+        if (player.curHealth <= 0 || gameTime > 60 * 60f)
         {
             OnPlayerDead();
             gameTime = 0;
@@ -67,7 +83,8 @@ public class GameManager : MonoBehaviour
         player.curHealth = 0.1f;
         AudioManager.instance.PlayBgm(false);
 
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
+        if (gameTime != 0f)
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
     
     public void Restart()
@@ -79,7 +96,21 @@ public class GameManager : MonoBehaviour
     {
         SkillUI.SetActive(true);
         // playerSkill0.SetActive(true);
+        // AudioManager.instance.bgmPlayer.mute = false;
         AudioManager.instance.PlayBgm(true);
+    }
+
+    public void setBGMVolume()
+    {
+        AudioManager.instance.bgmPlayer.volume = BGMScrollbar.value * 0.2f;
+    }
+
+    public void setSFXtVolume()
+    {
+        for (int i = 0; i < AudioManager.instance.sfxPlayers.Length; i++)
+        {
+            AudioManager.instance.sfxPlayers[i].volume = SFXScrollbar.value * 0.5f;
+        }
     }
 
     public void Pause()
@@ -87,6 +118,21 @@ public class GameManager : MonoBehaviour
         pauseActive = true;
         pauseUI.SetActive(true);
         AudioManager.instance.EffectBgm(true);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
+    public void ExitOption()
+    {
+        optionUI.SetActive(false);
+    }
+
+    public void Option()
+    {
+        optionUI.SetActive(true);
     }
 
     public void Resume()
@@ -114,7 +160,13 @@ public class GameManager : MonoBehaviour
         else
         {
             pauseActive = false;
-            rangedWeapon.SetActive(true); // 스킬을 선택하고 weapon 착용
+            rangeWeaponActive = true;
+            GameObject newWeapon = new GameObject();
+            
+            rangeWeapon = newWeapon.AddComponent<Weapon>();
+            rangeWeapon.Init(data1);
+            GameManager.instance.weaponLevelCount++;
+
             SkillUI.SetActive(false);
             AudioManager.instance.EffectBgm(false);
         }
@@ -131,7 +183,13 @@ public class GameManager : MonoBehaviour
         else
         {
             pauseActive = false;
-            playerObject.SetActive(true); // 스킬을 선택하고 weapon 착용
+            meleeWeaponActive = true;
+            GameObject newWeapon = new GameObject();
+            meleeWeapon = newWeapon.AddComponent<Weapon>();
+            
+            meleeWeapon.Init(data0);
+            GameManager.instance.weaponLevelCount++;
+
             SkillUI.SetActive(false);
             AudioManager.instance.EffectBgm(false);
         }
@@ -153,4 +211,15 @@ public class GameManager : MonoBehaviour
             AudioManager.instance.EffectBgm(false);
         }
     }
+
+    public void gameClear()
+    {
+        // if (보스가 죽으면)
+
+        pauseActive = true;
+        pauseUI.SetActive(false);
+        gameclearUI.SetActive(true);
+    }
+
+
 }

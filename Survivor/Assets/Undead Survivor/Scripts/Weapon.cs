@@ -15,13 +15,9 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
+        player = GameManager.instance.player;
     }
 
-    void Start()
-    {
-        Init();
-    }
     // Update is called once per frame
     void Update()
     {
@@ -34,7 +30,7 @@ public class Weapon : MonoBehaviour
                 {
                     timer += Time.deltaTime;
 
-                    if (timer > speed)
+                    if (timer > speed / count) 
                     {
                         timer = 0.0f;
                         Fire();
@@ -48,21 +44,56 @@ public class Weapon : MonoBehaviour
         // prefabId = GameManager.instance.
     }
 
-    public void Init()
+    public void Init(WeaponData data)
     {
+        // Basic Set
+        name = "Weapon " + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property Set
+        id = data.itemId;
+        damage = data.BaseDamage;
+        count = data.baseCount;
+
+        if (id == 0)
+            prefabId = 1;
+        else if (id == 1)
+            prefabId = 3;
+
+        /*
+        for (int i = 0; i < GameManager.instance.pool.prefabs.Length; i++)
+        {
+            if (data.projectile == GameManager.instance.pool.prefabs[i])
+            {
+                prefabId = i;
+                break;
+            }
+        }*/
+
         switch (id)
         {
             case 0:
-                speed = 150; // ½Ã°è ¹Ý´ë ¹æÇâÀ¸·Î È¸Àü ¼Óµµ
-                damage = 10;
-                count = 15;
+                speed = 150; // ½Ã°è ¹Ý´ë ¹æÇâÀ¸·Î È¸Àü ¼Óµµ;
                 Batch();
                 break;
             case 1:
-                speed = 0.5f;
+                speed = 0.5f;   
                 break;
             default:
                 break;
+        }
+    }
+
+    public void LevelUp(float damage, int count)
+    {
+        this.damage = damage;
+        this.count = count;
+
+        if (id == 0)
+        {
+            Batch();
+            Debug.Log("ID == 0");
         }
     }
 
@@ -78,13 +109,17 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-                bullet = GameManager.instance.pool.Get(prefabId).transform;
+                bullet = GameManager.instance.pool.Get(prefabId ).transform;
                 bullet.parent = transform; // ï¿½Î¸ï¿½ ï¿½Ù²ï¿½
             }
 
-            bullet.transform.position = new Vector3(0, 0, 0);
             bullet.parent = transform; // ºÎ¸ð¸¦ ¹Ù²Þ
-            
+            bullet.transform.localPosition = new Vector3(0, 0, 0);
+
+           
+            //bullet.transform.localPosition = new Vector3(0, 0, 0);
+            //bullet.parent = transform; // ºÎ¸ð¸¦ ¹Ù²Þ
+
             Vector3 rotVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(rotVec);
             bullet.Translate(bullet.up * 1.5f, Space.World);

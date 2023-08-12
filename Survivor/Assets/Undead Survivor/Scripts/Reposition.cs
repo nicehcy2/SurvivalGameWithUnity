@@ -17,31 +17,44 @@ public class Reposition : MonoBehaviour
         if (!collision.CompareTag("Area"))
             return;
 
+
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 myPos = transform.position;
-        float diffX = Mathf.Abs(playerPos.x - myPos.x);
-        float diffY = Mathf.Abs(playerPos.y - myPos.y);
 
-        Vector3 playerDir = GameManager.instance.player.inputVec;
-        float dirX = playerDir.x < 0 ? -1 : 1;
-        float dirY = playerDir.y < 0 ? -1 : 1;
+        float diffX = playerPos.x - myPos.x;
+        float diffY = playerPos.y - myPos.y;
+
+        float dirX = diffX < 0 ? -1 : 1;
+        float dirY = diffY < 0 ? -1 : 1;
+
+        diffX = Mathf.Abs(diffX);
+        diffY = Mathf.Abs(diffY);
+        
 
         switch (transform.tag)
         {
             case "Ground":
-                if (diffX > diffY)
+                if (Mathf.Abs(diffX - diffY) <= 0.1f)
                 {
-                    transform.Translate(Vector3.right * dirX * 40);
+                    transform.Translate(Vector3.up * dirY * 80);
+                    transform.Translate(Vector3.right * dirX * 80);
+                }
+                else if (diffX > diffY)
+                {
+                    transform.Translate(Vector3.right * dirX * 80);
                 }
                 else if (diffX < diffY)
                 {
-                    transform.Translate(Vector3.up * dirY * 40);
+                    transform.Translate(Vector3.up * dirY * 80);
                 }
                 break;
             case "Enemy":
                 if (coll.enabled)
-                {   
-                    transform.Translate(playerDir * 20 + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f)));
+                {
+                    Vector3 dist = playerPos - myPos;
+                    Vector3 ran = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+                    transform.Translate(ran + dist * 2);
+                    // transform.Translate(playerDir * 20 + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f)));
                 }
 
                 break;

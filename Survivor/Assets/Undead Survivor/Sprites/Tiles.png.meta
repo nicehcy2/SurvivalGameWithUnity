@@ -267,11 +267,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Tile 0: 2093186594
+      Tile 1: -2031541144
       Tile 2: 693853673
       Tile 3: 179664457
       Tile 4: 1830541467
-      Tile 0: 2093186594
-      Tile 1: -2031541144
       Tile 5: -133327340
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

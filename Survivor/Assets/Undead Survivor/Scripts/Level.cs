@@ -17,6 +17,10 @@ public class Level : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             level = player.level;
             text_lv[0].text = level.ToString();
+            if (level >= 11)
+            {
+                text_lv[0].text = "MAX";
+            }
         }
     }
 }

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06b369148f9687478147be1b4832de2, type: 3}
+  m_Name: weapon1
+  m_EditorClassIdentifier: 
+  itmeType: 1
+  itemId: 1
+  itemName: "\uCD1D"
+  itemNDesc: 
+  itemIcon: 
+  BaseDamage: 4.5
+  baseCount: 1
+  damages:
+  - 0.5
+  - 1
+  - 1.5
+  - 2
+  - 2.5
+  - 3
+  - 4.5
+  - 5
+  - 5.5
+  - 10
+  counts: 010000000200000003000000040000000600000007000000090000000c0000000f00000014000000
+  projectile: {fileID: 5982701894165204688, guid: f0dc8841ca2c6c943822c2e3af32884e, type: 3}

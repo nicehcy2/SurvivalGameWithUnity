@@ -5,12 +5,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class LevelUpManager : MonoBehaviour
-{
+{   
     int enumSize = 4;
     int[] arr;
 
     public List<Sprite> skillSprite;
     public GameObject levelUpUI;
+    public WeaponData data0;
+    public WeaponData data1;
+    public Weapon weapon;
+
     enum upgrade {
         skillDamage = 0, skillCount, health, speed
     }
@@ -34,16 +38,74 @@ public class LevelUpManager : MonoBehaviour
 
     public void upgradeSkillDamage()
     {
+        if (GameManager.instance.meleeWeaponActive)
+        {
+            float nextDamage = data0.BaseDamage;
+            int nextCount = 0;
+
+            nextDamage += data0.BaseDamage * data0.damages[GameManager.instance.weaponDamageCount];
+            nextCount = data0.counts[GameManager.instance.weaponCount];
+            GameManager.instance.weaponDamageCount++;
+
+            GameManager.instance.meleeWeapon.LevelUp(nextDamage, nextCount);
+        }
+        else if (GameManager.instance.rangeWeaponActive)
+        {
+            float nextDamage = data1.BaseDamage;
+            int nextCount = 0;
+
+            nextDamage += data1.BaseDamage * data1.damages[GameManager.instance.weaponDamageCount];
+            nextCount = data1.counts[GameManager.instance.weaponCount];
+            GameManager.instance.weaponDamageCount++;
+
+            GameManager.instance.rangeWeapon.LevelUp(nextDamage, nextCount);
+        }
     }
 
     public void upgradeCount()
-    {   /*
-        int cnt = GameManager.instance.player.transform.GetChild(3).GetComponent<Weapon>().count + 2;
-        float damage = GameManager.instance.player.transform.GetChild(3).GetComponent<Weapon>().damage;
-        float speed = GameManager.instance.player.transform.GetChild(3).GetComponent<Weapon>().speed;
-        GameManager.instance.player.transform.GetChild(3).GetComponent<Weapon>().ReInit(0, 1, 10f, 10, 150);
-        GameManager.instance.player.transform.GetChild(5).GetComponent<Weapon>().count += 2;
-        */
+    {
+        if (GameManager.instance.meleeWeaponActive)
+        {
+            if (GameManager.instance.weaponLevelCount == 0)
+            {
+                GameObject newWeapon = new GameObject();
+                weapon = newWeapon.AddComponent<Weapon>();
+                weapon.Init(data0);
+                GameManager.instance.weaponLevelCount++;
+            }
+            else
+            {
+                float nextDamage = data0.BaseDamage;
+                int nextCount = 0;
+
+                nextCount += data0.counts[GameManager.instance.weaponCount];
+                nextDamage += data0.BaseDamage * data0.damages[GameManager.instance.weaponDamageCount];
+                GameManager.instance.weaponCount++;
+
+                GameManager.instance.meleeWeapon.LevelUp(nextDamage, nextCount);
+            }
+        }
+        else if (GameManager.instance.rangeWeaponActive)
+        {
+            if (GameManager.instance.weaponLevelCount == 0)
+            {
+                GameObject newWeapon = new GameObject();
+                weapon = newWeapon.AddComponent<Weapon>();
+                weapon.Init(data1);
+                GameManager.instance.weaponLevelCount++;
+            }
+            else
+            {
+                float nextDamage = data1.BaseDamage;
+                int nextCount = 0;
+
+                nextCount += data1.counts[GameManager.instance.weaponCount];
+                nextDamage += data1.BaseDamage * data1.damages[GameManager.instance.weaponDamageCount];
+                GameManager.instance.weaponCount++;
+
+                GameManager.instance.rangeWeapon.LevelUp(nextDamage, nextCount);
+            }
+        }
     }
     public void upgradeHealth()
     {
