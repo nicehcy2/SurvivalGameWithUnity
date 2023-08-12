@@ -16,7 +16,7 @@
   - 멤버 : 허찬영, 장세영
 
 ## 게임 설명
-<img width="960" alt="MainTitle" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/17f21d09-a635-4f89-9403-dabc7dc108d1">
+<img width="480" alt="MainTitle" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/17f21d09-a635-4f89-9403-dabc7dc108d1"> <br>
 메인 화면 페이지에서 "New Game Start" 버튼을 누르면 게임이 시작됩니다. 게임의 규칙은 다음과 같습니다.<br>
 - 플레이어는 원거리 타입, 근접 타입 중 하나의 스킬을 선택할 수 있습니다. <br>
 - 스폰한 좀비들은 플레이어에게 접근하며 공격합니다. 플레이어는 어디로 도망가든 좀비를 따돌리지 못합니다. 스킬과 아이템을 활용해서 좀비를 잡으세요 <br>
