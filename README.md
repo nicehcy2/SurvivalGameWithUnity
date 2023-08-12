@@ -27,8 +27,7 @@
 ## 스킬 설명
 |스킬|원거리 스킬|근거리 스킬|
 |---|---|---|
-|Icon|
-<img width="95" alt="Melee" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/2f6daf21-a8dc-4f9f-bb63-1e1b38f50e9a">|<img width="95" alt="RangeSkill" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/200c4f39-ea5f-4867-b318-56effc15f4fc">|
+|Icon|<img width="95" alt="Melee" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/2f6daf21-a8dc-4f9f-bb63-1e1b38f50e9a">|<img width="95" alt="RangeSkill" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/200c4f39-ea5f-4867-b318-56effc15f4fc">|
 
 <img width="480" alt="RangeSkillPlay" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/00f2e581-718a-4b9e-ba6b-9babccf0d49d">
 - 원거리 스킬: 가장 가까이에 있는 좀비로 원거리 스킬을 시전합니다.
