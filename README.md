@@ -30,7 +30,7 @@
 |Icon|<img width="95" alt="Melee" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/2f6daf21-a8dc-4f9f-bb63-1e1b38f50e9a">|<img width="95" alt="RangeSkill" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/200c4f39-ea5f-4867-b318-56effc15f4fc">|<br>
 
 <img width="480" alt="RangeSkillPlay" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/00f2e581-718a-4b9e-ba6b-9babccf0d49d"><br>
-- 원거리 스킬: 가장 가까이에 있는 좀비로 원거리 스킬을 시전합니다.<br>
+- 원거리 스킬: 플레이어와 가장 가까이에 있는 좀비에게 원거리 스킬을 시전합니다.<br>
 
 <img width="480" alt="MeleeSkillPlay" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/86a6cf0e-d9d0-4c03-8afd-0241100ef378"><br>
 - 근거리 스킬: 플레이어 주위로 근접 스킬이 회전하여 좀비를 공격합니다.<br>
