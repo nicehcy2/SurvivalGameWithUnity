@@ -38,8 +38,8 @@
 ## 아이템 설명
 |아이템|Health Pack|Boost|Adrenaline|Magnet|Bomb|
 |---|---|---|---|---|---|
-|Image|
-<img width="50" alt="HealthPack" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/ec3b931b-20b4-4686-974e-a599526cf56e">
+|Image
+|<img width="50" alt="HealthPack" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/ec3b931b-20b4-4686-974e-a599526cf56e">
 |<img width="50" alt="BoostItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/36317c9e-42d6-4783-9bd7-7deeb9cb133f">
 |<img width="50" alt="AdrenalineItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/bcd01a4c-36db-4989-a491-bd8e8a2b1478">
 |<img width="50" alt="MagnetItem" src="https://github.com/nicehcy2/SurvivalGameWithUnity/assets/105339362/839346f6-9f8f-45a7-bbdf-df56fb350092">
