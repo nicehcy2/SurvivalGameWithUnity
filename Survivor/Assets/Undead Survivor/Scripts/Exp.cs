@@ -22,7 +22,7 @@ public class Exp : MonoBehaviour
     {
         if (magnetTime)
         {
-            transform.position = Vector3.MoveTowards(transform.position, GameManager.instance.player.transform.position, 0.01f);
+            transform.position = Vector3.MoveTowards(transform.position, GameManager.instance.player.transform.position, 0.015f);
         }
     }
 
