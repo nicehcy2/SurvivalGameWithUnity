@@ -76,7 +76,8 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         //부딪힌 객체의 태그를 비교해서 적인지 판단합니다.
         {   
-            GameManager.instance.player.DamagePlayer(atk);
+            if (!GameManager.instance.levelUpActive)
+                GameManager.instance.player.DamagePlayer(atk);
         }
     }
 
@@ -158,5 +159,10 @@ public class Enemy : MonoBehaviour
     public void FalseActive()
     {
         gameObject.SetActive(false);
+    }
+
+    public void boost(float _speed)
+    {
+        speed = _speed;
     }
 }

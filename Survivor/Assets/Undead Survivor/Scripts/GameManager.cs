@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     public int weaponCount = 0;
     public int weaponDamageCount = 0;
     public int weaponLevelCount = 0;
-    
+    public int bossHealth = 0;
+    public int bossCount = 0;
+    public int maxBossHealth = 1000;
 
     public PoolManager pool;
     public Player player;
@@ -28,6 +30,10 @@ public class GameManager : MonoBehaviour
     public GameObject levelUpUI;
     public GameObject SkillUI;
     public GameObject gameclearUI;
+    public Boss boss_start;
+    public Enemy boss;
+    public bool bossActive = false;
+    public float Delay = 0.0f;
 
     public GameObject playerObject;
     public GameObject rangedWeapon;
@@ -35,6 +41,7 @@ public class GameManager : MonoBehaviour
     public bool meleeWeaponActive = false;
     public Weapon rangeWeapon;
     public bool rangeWeaponActive = false;
+    public GameObject bossHealthBar;
 
     public Scrollbar BGMScrollbar;
     public Scrollbar SFXScrollbar;
@@ -55,8 +62,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
+    void Update() { 
         if (player.curHealth <= 0 || gameTime > 60 * 60f)
         {
             OnPlayerDead();
@@ -73,6 +79,33 @@ public class GameManager : MonoBehaviour
                     gameTime = MaxGameTime;
                 }
             }
+        }
+
+        if (player.level >= 11 && bossCount == 0)
+        {
+            boss_start.gameObject.SetActive(true);
+            bossHealthBar.SetActive(true);
+            bossActive = true;
+            bossCount++;
+            if (Delay % 2 > 1)
+            {
+                boss.boost(10.0f);
+
+            }
+            else if (Delay % 2.5 > 1)
+            {
+                Delay = 0.0f;
+            }
+            else
+            {
+                boss.boost(2.0f);
+            }
+        }
+
+        if (boss_start.gameObject.activeSelf == false && player.level >= 11)
+        {
+            gameClear();
+            gameTime = 0;
         }
     }
 
@@ -214,11 +247,14 @@ public class GameManager : MonoBehaviour
 
     public void gameClear()
     {
-        // if (보스가 죽으면)
-
         pauseActive = true;
         pauseUI.SetActive(false);
         gameclearUI.SetActive(true);
+        if (gameTime != 0)
+        {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+        }
+        gameTime = 0;
     }
 
 
